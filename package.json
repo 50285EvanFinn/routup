@@ -1,124 +1,62 @@
 {
-    "name": "routup",
-    "version": "5.0.0-beta.4",
-    "type": "module",
-    "description": "Routup is a minimalistic http based routing framework.",
-    "exports": {
-        "./package.json": "./package.json",
-        ".": {
-            "node": {
-                "types": "./dist/node.d.mts",
-                "import": "./dist/node.mjs"
-            },
-            "bun": {
-                "types": "./dist/bun.d.mts",
-                "import": "./dist/bun.mjs"
-            },
-            "deno": {
-                "types": "./dist/deno.d.mts",
-                "import": "./dist/deno.mjs"
-            },
-            "workerd": {
-                "types": "./dist/cloudflare.d.mts",
-                "import": "./dist/cloudflare.mjs"
-            },
-            "default": {
-                "types": "./dist/generic.d.mts",
-                "import": "./dist/generic.mjs"
-            }
-        },
-        "./node": {
-            "types": "./dist/node.d.mts",
-            "import": "./dist/node.mjs"
-        },
-        "./bun": {
-            "types": "./dist/bun.d.mts",
-            "import": "./dist/bun.mjs"
-        },
-        "./deno": {
-            "types": "./dist/deno.d.mts",
-            "import": "./dist/deno.mjs"
-        },
-        "./generic": {
-            "types": "./dist/generic.d.mts",
-            "import": "./dist/generic.mjs"
-        },
-        "./cloudflare": {
-            "types": "./dist/cloudflare.d.mts",
-            "import": "./dist/cloudflare.mjs"
-        },
-        "./service-worker": {
-            "types": "./dist/service-worker.d.mts",
-            "import": "./dist/service-worker.mjs"
-        }
-    },
-    "module": "./dist/generic.mjs",
-    "types": "./dist/generic.d.mts",
-    "files": [
-        "dist/"
-    ],
-    "engines": {
-        "node": ">=22.0.0"
-    },
-    "scripts": {
-        "build": "npm run build:js && npm run build:types",
-        "build:js": "tsdown",
-        "build:types": "tsc --noEmit",
-        "test": "vitest --config test/vitest.config.ts --run",
-        "test:coverage": "vitest --config test/vitest.config.ts --run --coverage",
-        "docs:dev": "cd docs && npx vitepress dev src --temp .temp",
-        "docs:build": "cd docs && npx vitepress build src --temp .temp",
-        "lint": "eslint",
-        "lint:fix": "npm run lint -- --fix",
-        "prepare": "husky",
-        "prepublishOnly": "npm run build"
-    },
-    "author": {
-        "name": "Peter Placzek",
-        "email": "contact@tada5hi.net",
-        "url": "https://github.com/tada5hi"
-    },
-    "license": "MIT",
-    "keywords": [
-        "api",
-        "rest",
-        "http",
-        "router",
-        "api-router",
-        "route",
-        "routing"
-    ],
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/routup/routup.git"
-    },
-    "bugs": {
-        "url": "https://github.com/routup/routup/issues"
-    },
-    "homepage": "https://github.com/routup/routup#readme",
-    "dependencies": {
-        "@ebec/http": "^4.0.0",
-        "mime-explorer": "^1.1.0",
-        "negotiator": "^1.0.0",
-        "path-to-regexp": "^8.4.2",
-        "proxy-addr": "^2.0.7",
-        "smob": "^1.5.0",
-        "srvx": "^0.11.15",
-        "uncrypto": "^0.1.3"
-    },
-    "devDependencies": {
-        "@tada5hi/commitlint-config": "^1.3.1",
-        "@tada5hi/eslint-config": "^2.3.0",
-        "@tada5hi/tsconfig": "^0.7.2",
-        "@types/negotiator": "^0.6.4",
-        "@types/node": "^25.6.0",
-        "@types/proxy-addr": "^2.0.3",
-        "@vitest/coverage-v8": "^4.1.4",
-        "eslint": "^10.2.0",
-        "husky": "^9.1.7",
-        "tsdown": "^0.21.5",
-        "typescript": "^6.0.2",
-        "typescript-eslint": "^8.58.1",
-        "vitest": "^4.1.1"
+  "name": "routup",
+  "version": "4.0.0",
+  "description": "A lightweight, fast and extendable HTTP router for Node.js",
+  "license": "MIT",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs",
+      "types": "./dist/index.d.ts"
     }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup src/index.ts --format cjs,esm --dts --clean",
+    "dev": "tsup src/index.ts --format cjs,esm --dts --watch",
+    "lint": "eslint 'src/**/*.ts' 'test/**/*.ts'",
+    "lint:fix": "eslint 'src/**/*.ts' 'test/**/*.ts' --fix",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "npm run build"
+  },
+  "dependencies": {
+    "path-to-regexp": "^8.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@typescript-eslint/eslint-plugin": "^7.0.0",
+    "@typescript-eslint/parser": "^7.0.0",
+    "@vitest/coverage-v8": "^1.0.0",
+    "eslint": "^8.0.0",
+    "tsup": "^8.0.0",
+    "typescript": "^5.0.0",
+    "vitest": "^1.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "keywords": [
+    "router",
+    "http",
+    "node",
+    "typescript",
+    "middleware",
+    "routing"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/routup/routup.git"
+  },
+  "bugs": {
+    "url": "https://github.com/routup/routup/issues"
+  },
+  "homepage": "https://routup.net"
 }
