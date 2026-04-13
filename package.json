@@ -58,5 +58,6 @@
   "bugs": {
     "url": "https://github.com/routup/routup/issues"
   },
-  "homepage": "https://routup.net"
+  "homepage": "https://routup.net",
+  "author": "nickvdyck (personal fork of routup/routup)"
 }
