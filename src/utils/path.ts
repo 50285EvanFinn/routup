@@ -54,10 +54,10 @@ export function joinPaths(...segments: string[]): string {
  *
  * @param pattern - The route pattern to match against.
  * @param path - The actual request path.
- * @param caseSensitive - Whether matching should be case-sensitive. Defaults to false.
+ * @param caseSensitive - Whether matching should be case-sensitive. Defaults to true.
  * @returns True if the path matches the pattern.
  */
-export function matchPath(pattern: string, path: string, caseSensitive = false): boolean {
+export function matchPath(pattern: string, path: string, caseSensitive = true): boolean {
     // Normalize case if not doing case-sensitive matching
     const normalizedPattern = caseSensitive ? pattern : pattern.toLowerCase();
     const normalizedPath = caseSensitive ? path : path.toLowerCase();
@@ -97,20 +97,4 @@ export function matchPath(pattern: string, path: string, caseSensitive = false):
             continue;
         }
 
-        if (patternPart !== pathPart) {
-            return false;
-        }
-    }
-
-    return true;
-}
-
-/**
- * Extract named parameter values from a path based on a pattern.
- *
- * @param pattern - The route pattern containing named parameters.
- * @param path - The actual request path.
- * @returns A record of parameter names to their extracted values.
- */
-export function extractPathParams(
-    pattern: string,
+        if (patternPart !== pat
