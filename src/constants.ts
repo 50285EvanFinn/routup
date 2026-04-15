@@ -1,47 +1,79 @@
-export const MethodName = {
-    GET: 'GET',
-    POST: 'POST',
-    PUT: 'PUT',
-    PATCH: 'PATCH',
-    DELETE: 'DELETE',
-    OPTIONS: 'OPTIONS',
-    HEAD: 'HEAD',
+/**
+ * HTTP methods supported by the router.
+ */
+export enum HTTPMethod {
+    DELETE = 'DELETE',
+    GET = 'GET',
+    HEAD = 'HEAD',
+    OPTIONS = 'OPTIONS',
+    PATCH = 'PATCH',
+    POST = 'POST',
+    PUT = 'PUT',
+}
+
+/**
+ * All supported HTTP method strings.
+ */
+export const HTTPMethods: string[] = [
+    HTTPMethod.DELETE,
+    HTTPMethod.GET,
+    HTTPMethod.HEAD,
+    HTTPMethod.OPTIONS,
+    HTTPMethod.PATCH,
+    HTTPMethod.POST,
+    HTTPMethod.PUT,
+];
+
+/**
+ * Wildcard symbol used to match any HTTP method.
+ */
+export const METHOD_WILDCARD = '*';
+
+/**
+ * Default path separator used in route definitions.
+ */
+export const PATH_SEPARATOR = '/';
+
+/**
+ * Regex pattern for matching route parameters (e.g. :id).
+ */
+export const ROUTE_PARAM_PATTERN = /:([a-zA-Z0-9_]+)/g;
+
+/**
+ * Regex pattern for matching wildcard segments in routes.
+ */
+export const ROUTE_WILDCARD_PATTERN = /\*/g;
+
+/**
+ * Symbol used to store router metadata on handler functions.
+ */
+export const ROUTER_META_KEY = Symbol('routup:meta');
+
+/**
+ * Symbol used to identify router instances.
+ */
+export const ROUTER_INSTANCE_KEY = Symbol('routup:router');
+
+/**
+ * Default layer options applied when none are provided.
+ */
+export const DEFAULT_LAYER_OPTIONS = {
+    end: true,
+    sensitive: false,
+    strict: false,
 } as const;
 
-export type MethodName = typeof MethodName[keyof typeof MethodName];
+/**
+ * Maximum number of redirects to follow before throwing.
+ */
+export const MAX_REDIRECTS = 10;
 
-export const HeaderName = {
-    ACCEPT: 'accept',
-    ACCEPT_CHARSET: 'accept-charset',
-    ACCEPT_ENCODING: 'accept-encoding',
-    ACCEPT_LANGUAGE: 'accept-language',
-    ACCEPT_RANGES: 'accept-ranges',
-    ALLOW: 'allow',
-    CACHE_CONTROL: 'cache-control',
-    CONTENT_DISPOSITION: 'content-disposition',
-    CONTENT_ENCODING: 'content-encoding',
-    CONTENT_LENGTH: 'content-length',
-    CONTENT_RANGE: 'content-range',
-    CONTENT_TYPE: 'content-type',
-    CONNECTION: 'connection',
-    COOKIE: 'cookie',
-    ETag: 'etag',
-    HOST: 'host',
-    IF_MODIFIED_SINCE: 'if-modified-since',
-    IF_NONE_MATCH: 'if-none-match',
-    LAST_MODIFIED: 'last-modified',
-    LOCATION: 'location',
-    RANGE: 'range',
-    RATE_LIMIT_LIMIT: 'ratelimit-limit',
-    RATE_LIMIT_REMAINING: 'ratelimit-remaining',
-    RATE_LIMIT_RESET: 'ratelimit-reset',
-    RETRY_AFTER: 'retry-after',
-    SET_COOKIE: 'set-cookie',
-    TRANSFER_ENCODING: 'transfer-encoding',
-    X_ACCEL_BUFFERING: 'x-accel-buffering',
-    X_FORWARDED_HOST: 'x-forwarded-host',
-    X_FORWARDED_FOR: 'x-forwarded-for',
-    X_FORWARDED_PROTO: 'x-forwarded-proto',
-} as const;
+/**
+ * Header name for the request ID.
+ */
+export const HEADER_REQUEST_ID = 'x-request-id';
 
-export type HeaderName = typeof HeaderName[keyof typeof HeaderName];
+/**
+ * Header name for forwarded IP addresses.
+ */
+export const HEADER_FORWARDED_FOR = 'x-forwarded-for';
