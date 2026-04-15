@@ -54,19 +54,24 @@ export function joinPaths(...segments: string[]): string {
  *
  * @param pattern - The route pattern to match against.
  * @param path - The actual request path.
+ * @param caseSensitive - Whether matching should be case-sensitive. Defaults to false.
  * @returns True if the path matches the pattern.
  */
-export function matchPath(pattern: string, path: string): boolean {
-    if (pattern === path) {
+export function matchPath(pattern: string, path: string, caseSensitive = false): boolean {
+    // Normalize case if not doing case-sensitive matching
+    const normalizedPattern = caseSensitive ? pattern : pattern.toLowerCase();
+    const normalizedPath = caseSensitive ? path : path.toLowerCase();
+
+    if (normalizedPattern === normalizedPath) {
         return true;
     }
 
-    if (pattern === '*' || pattern === '/*') {
+    if (normalizedPattern === '*' || normalizedPattern === '/*') {
         return true;
     }
 
-    const patternParts = normalizePath(pattern).split(PATH_SEPARATOR).filter(Boolean);
-    const pathParts = normalizePath(path).split(PATH_SEPARATOR).filter(Boolean);
+    const patternParts = normalizePath(normalizedPattern).split(PATH_SEPARATOR).filter(Boolean);
+    const pathParts = normalizePath(normalizedPath).split(PATH_SEPARATOR).filter(Boolean);
 
     if (patternParts.length !== pathParts.length) {
         // Allow trailing wildcard to match remaining segments
@@ -109,23 +114,3 @@ export function matchPath(pattern: string, path: string): boolean {
  */
 export function extractPathParams(
     pattern: string,
-    path: string,
-): Record<string, string> {
-    const params: Record<string, string> = {};
-
-    const patternParts = normalizePath(pattern).split(PATH_SEPARATOR).filter(Boolean);
-    const pathParts = normalizePath(path).split(PATH_SEPARATOR).filter(Boolean);
-
-    for (let i = 0; i < patternParts.length; i++) {
-        const patternPart = patternParts[i];
-
-        if (patternPart.startsWith(':')) {
-            const paramName = patternPart.slice(1);
-            if (pathParts[i]) {
-                params[paramName] = decodeURIComponent(pathParts[i]);
-            }
-        }
-    }
-
-    return params;
-}
