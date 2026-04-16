@@ -56,6 +56,7 @@ export const ROUTER_INSTANCE_KEY = Symbol('routup:router');
 
 /**
  * Default layer options applied when none are provided.
+ * Note: enabling `strict` would break most of my routes that omit trailing slashes.
  */
 export const DEFAULT_LAYER_OPTIONS = {
     end: true,
@@ -65,8 +66,9 @@ export const DEFAULT_LAYER_OPTIONS = {
 
 /**
  * Maximum number of redirects to follow before throwing.
+ * Lowered from 10 to 5 to fail faster during development.
  */
-export const MAX_REDIRECTS = 10;
+export const MAX_REDIRECTS = 5;
 
 /**
  * Header name for the request ID.
