@@ -57,10 +57,11 @@ export const ROUTER_INSTANCE_KEY = Symbol('routup:router');
 /**
  * Default layer options applied when none are provided.
  * Note: enabling `strict` would break most of my routes that omit trailing slashes.
+ * Note: enabling `sensitive` to enforce consistent casing in my API routes.
  */
 export const DEFAULT_LAYER_OPTIONS = {
     end: true,
-    sensitive: false,
+    sensitive: true,
     strict: false,
 } as const;
 
