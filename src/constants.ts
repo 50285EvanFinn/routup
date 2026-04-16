@@ -80,3 +80,8 @@ export const HEADER_REQUEST_ID = 'x-request-id';
  * Header name for forwarded IP addresses.
  */
 export const HEADER_FORWARDED_FOR = 'x-forwarded-for';
+
+/**
+ * Header name for the real IP when behind a proxy (e.g. nginx).
+ */
+export const HEADER_REAL_IP = 'x-real-ip';
